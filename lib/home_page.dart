@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'login_page.dart';
 import 'team_page.dart';
+import 'even_odd_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,7 +14,21 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue, title: const Text("Menu")),
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: const Text("Menu"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+          ),
+        ],
+      ),
       body: GridView.count(
         padding: const EdgeInsets.all(25),
         crossAxisCount: 2,
@@ -57,7 +73,12 @@ class _HomePageState extends State<HomePage> {
           Card(
             margin: const EdgeInsets.all(8),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EvenOddPage()),
+                );
+              },
               splashColor: Colors.blue,
               child: Center(
                 child: Column(
