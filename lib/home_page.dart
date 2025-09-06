@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'team_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +20,12 @@ class _HomePageState extends State<HomePage> {
           Card(
             margin: const EdgeInsets.all(8),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TeamPage()),
+                );
+              },
               splashColor: Colors.blue,
               child: Center(
                 child: Column(

@@ -21,11 +21,9 @@ class _LoginPageState extends State<LoginPage> {
     // Cek apakah username dan password cocok
     if (_validUsers[username] == password) {
       // Login berhasil (belum dinavigasi ke halaman lain)
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login Berhasil!'),
-          backgroundColor: Colors.green,
-        ),
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
       // Login gagal
