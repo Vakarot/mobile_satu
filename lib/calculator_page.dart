@@ -17,6 +17,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Calculator'),
+        backgroundColor: Colors.blue,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         bottom: false,
         child: Column(
@@ -44,18 +55,20 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
             // buttons
             Wrap(
-              children: Btn.buttonValues
-                  .map(
-                    (value) => SizedBox(
-                      width: value == Btn.n0
-                          ? screenSize.width / 2
-                          : (screenSize.width / 4),
-                      height: screenSize.width / 5,
-                      child: buildButton(value),
-                    ),
-                  )
-                  .toList(),
-            )
+              children:
+                  Btn.buttonValues
+                      .map(
+                        (value) => SizedBox(
+                          width:
+                              value == Btn.n0
+                                  ? screenSize.width / 2
+                                  : (screenSize.width / 4),
+                          height: screenSize.width / 5,
+                          child: buildButton(value),
+                        ),
+                      )
+                      .toList(),
+            ),
           ],
         ),
       ),
@@ -69,9 +82,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         color: getBtnColor(value),
         clipBehavior: Clip.hardEdge,
         shape: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.white24,
-          ),
+          borderSide: const BorderSide(color: Colors.white24),
           borderRadius: BorderRadius.circular(100),
         ),
         child: InkWell(
@@ -216,14 +227,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return [Btn.del, Btn.clr].contains(value)
         ? Colors.blueGrey
         : [
-            Btn.per,
-            Btn.multiply,
-            Btn.add,
-            Btn.subtract,
-            Btn.divide,
-            Btn.calculate,
-          ].contains(value)
-            ? Colors.orange
-            : Colors.black87; 
+          Btn.per,
+          Btn.multiply,
+          Btn.add,
+          Btn.subtract,
+          Btn.divide,
+          Btn.calculate,
+        ].contains(value)
+        ? Colors.blue
+        : Colors.black87;
   }
 }
