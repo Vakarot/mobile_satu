@@ -20,13 +20,33 @@ class _LoginPageState extends State<LoginPage> {
 
     // Cek apakah username dan password cocok
     if (_validUsers[username] == password) {
-      // Login berhasil (belum dinavigasi ke halaman lain)
+      // Login berhasil
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),
       );
+    } else if (username.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Username harus diisi!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password harus diisi!'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else if (username.isEmpty && password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Username dan Password harus diisi!'),
+          backgroundColor: Colors.red,
+        ),
+      );
     } else {
-      // Login gagal
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Username atau Password salah!'),
@@ -40,7 +60,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
@@ -50,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Login',
+              'Selamat Datang',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 40),

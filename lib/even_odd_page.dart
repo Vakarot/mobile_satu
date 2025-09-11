@@ -89,8 +89,7 @@ class _EvenOddPageState extends State<EvenOddPage> {
                   child: ElevatedButton(
                     onPressed: _reset,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 15),
                     ),
                     child: const Text('Reset'),
