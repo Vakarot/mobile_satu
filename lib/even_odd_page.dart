@@ -12,11 +12,18 @@ class _EvenOddPageState extends State<EvenOddPage> {
   String _hasil = '';
 
   void _cekGanjilGenap() {
-    int bilangan = int.tryParse(_bilanganController.text) ?? 0;
-
     if (_bilanganController.text.isEmpty) {
       setState(() {
         _hasil = 'Silakan masukkan bilangan';
+      });
+      return;
+    }
+
+    int? bilangan = int.tryParse(_bilanganController.text);
+
+    if (bilangan == null) {
+      setState(() {
+        _hasil = 'Input tidak valid! Harap masukkan angka saja';
       });
       return;
     }
@@ -25,13 +32,9 @@ class _EvenOddPageState extends State<EvenOddPage> {
       setState(() {
         _hasil = '$bilangan adalah bilangan GENAP';
       });
-    } else if (bilangan % 2 != 0) {
+    } else {
       setState(() {
         _hasil = '$bilangan adalah bilangan GANJIL';
-      });
-    } else if (bilangan == 0) {
-      setState(() {
-        _hasil = '$bilangan adalah bilangan NOL';
       });
     }
   }
@@ -104,7 +107,6 @@ class _EvenOddPageState extends State<EvenOddPage> {
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.circular(8),
-                color: Colors.blue.shade50,
               ),
               child: Text(
                 _hasil.isEmpty ? 'Hasil' : _hasil,
