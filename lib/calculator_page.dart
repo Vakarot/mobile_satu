@@ -19,7 +19,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculator'),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.teal.shade400,
         foregroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -28,78 +28,108 @@ class _CalculatorPageState extends State<CalculatorPage> {
           },
         ),
       ),
-      body: SafeArea(
-        bottom: false,
-        child: Column(
-          children: [
-            // output
-            Expanded(
-              child: SingleChildScrollView(
-                reverse: true,
-                child: Container(
-                  alignment: Alignment.bottomRight,
-                  padding: const EdgeInsets.all(16),
-                  child: Text(
-                    "$number1$operand$number2".isEmpty
-                        ? "0"
-                        : "$number1$operand$number2",
-                    style: const TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.teal.shade400, Colors.teal.shade700],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: SafeArea(
+          bottom: false,
+          child: Column(
+            children: [
+              // output
+              Expanded(
+                child: SingleChildScrollView(
+                  reverse: true,
+                  child: Container(
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      "$number1$operand$number2".isEmpty
+                          ? "0"
+                          : "$number1$operand$number2",
+                      style: const TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                      textAlign: TextAlign.end,
                     ),
-                    textAlign: TextAlign.end,
                   ),
                 ),
               ),
-            ),
 
-            // buttons
-            Wrap(
-              children:
-                  Btn.buttonValues
-                      .map(
-                        (value) => SizedBox(
-                          width:
-                              value == Btn.n0
-                                  ? screenSize.width / 2
-                                  : (screenSize.width / 4),
-                          height: screenSize.width / 5,
-                          child: buildButton(value),
-                        ),
-                      )
-                      .toList(),
-            ),
-          ],
+              // buttons
+              Wrap(
+                children:
+                    Btn.buttonValues
+                        .map(
+                          (value) => SizedBox(
+                            width:
+                                value == Btn.n0
+                                    ? screenSize.width / 2
+                                    : (screenSize.width / 4),
+                            height: screenSize.width / 5,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Card(
+                                elevation: 6,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100),
+                                ),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: getBtnColor(value),
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: InkWell(
+                                    onTap: () => onBtnTap(value),
+                                    customBorder: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        value,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                        .toList(),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget buildButton(value) {
-    return Padding(
-      padding: const EdgeInsets.all(4.0),
-      child: Material(
-        color: getBtnColor(value),
-        clipBehavior: Clip.hardEdge,
-        shape: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.white24),
-          borderRadius: BorderRadius.circular(100),
-        ),
-        child: InkWell(
-          onTap: () => onBtnTap(value),
-          child: Center(
-            child: Text(
-              value,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: Colors.white, // Teks putih untuk semua tombol
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+  Color getBtnColor(String value) {
+    if ([Btn.del, Btn.clr].contains(value)) {
+      return Colors.grey; // tombol delete & clear
+    } else if ([
+      Btn.per,
+      Btn.multiply,
+      Btn.divide,
+      Btn.subtract,
+      Btn.add,
+      Btn.calculate,
+    ].contains(value)) {
+      return Colors.teal.shade400; // operator
+    } else {
+      return Colors.teal.shade600; // angka & .
+    }
   }
 
   void onBtnTap(String value) {
@@ -107,22 +137,18 @@ class _CalculatorPageState extends State<CalculatorPage> {
       delete();
       return;
     }
-
     if (value == Btn.clr) {
       clearAll();
       return;
     }
-
     if (value == Btn.per) {
       convertToPercentage();
       return;
     }
-
     if (value == Btn.calculate) {
       calculate();
       return;
     }
-
     appendValue(value);
   }
 
@@ -153,11 +179,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
     setState(() {
       number1 = result.toStringAsPrecision(3);
-
       if (number1.endsWith(".0")) {
         number1 = number1.substring(0, number1.length - 2);
       }
-
       operand = "";
       number2 = "";
     });
@@ -167,11 +191,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if (number1.isNotEmpty && operand.isNotEmpty && number2.isNotEmpty) {
       calculate();
     }
-
     if (operand.isNotEmpty) {
       return;
     }
-
     final number = double.parse(number1);
     setState(() {
       number1 = "${(number / 100)}";
@@ -196,7 +218,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
     } else if (number1.isNotEmpty) {
       number1 = number1.substring(0, number1.length - 1);
     }
-
     setState(() {});
   }
 
@@ -219,22 +240,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
       }
       number2 += value;
     }
-
     setState(() {});
-  }
-
-  Color getBtnColor(value) {
-    return [Btn.del, Btn.clr].contains(value)
-        ? Colors.blueGrey
-        : [
-          Btn.per,
-          Btn.multiply,
-          Btn.add,
-          Btn.subtract,
-          Btn.divide,
-          Btn.calculate,
-        ].contains(value)
-        ? Colors.blue
-        : Colors.black87;
   }
 }
