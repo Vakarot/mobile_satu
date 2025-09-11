@@ -18,9 +18,7 @@ class _LoginPageState extends State<LoginPage> {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
-    // Cek apakah username dan password cocok
     if (_validUsers[username] == password) {
-      // Login berhasil
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const HomePage()),

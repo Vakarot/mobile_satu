@@ -5,12 +5,6 @@ class TeamPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> anggotaKelompok = [
-      {'nama': 'Afifah Choirunissa', 'nim': '124230004'},
-      {'nama': 'Luthfan Kafi Maulana', 'nim': '124230165'},
-      {'nama': 'Dahlia Apriliyana', 'nim': '124230169'},
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('About Us'),
@@ -38,11 +32,9 @@ class TeamPage extends StatelessWidget {
             children: [
               const SizedBox(height: 20),
               Expanded(
-                child: ListView.builder(
-                  itemCount: anggotaKelompok.length,
-                  itemBuilder: (context, index) {
-                    final anggota = anggotaKelompok[index];
-                    return Card(
+                child: Column(
+                  children: [
+                    Card(
                       margin: const EdgeInsets.only(bottom: 12),
                       elevation: 4,
                       shape: RoundedRectangleBorder(
@@ -64,34 +56,132 @@ class TeamPage extends StatelessWidget {
                           leading: CircleAvatar(
                             backgroundColor: Colors.white,
                             child: Text(
-                              anggota['nama']![0],
+                              'A',
                               style: TextStyle(
                                 color: Colors.teal.shade800,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          title: Text(
-                            anggota['nama']!,
-                            style: const TextStyle(
+                          title: const Text(
+                            'Afifah Choirunissa',
+                            style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
-                          subtitle: Column(
+                          subtitle: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'NIM: ${anggota['nim']}',
-                                style: const TextStyle(color: Colors.white70),
+                                'NIM: 124230004',
+                                style: TextStyle(color: Colors.white70),
                               ),
                             ],
                           ),
                           isThreeLine: true,
                         ),
                       ),
-                    );
-                  },
+                    ),
+                    Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.teal.shade800,
+                              Colors.teal.shade400,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Text(
+                              'L',
+                              style: TextStyle(
+                                color: Colors.teal.shade800,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          title: const Text(
+                            'Luthfan Kafi Maulana',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          subtitle: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'NIM: 124230165',
+                                style: TextStyle(color: Colors.white70),
+                              ),
+                            ],
+                          ),
+                          isThreeLine: true,
+                        ),
+                      ),
+                    ),
+                    Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.teal.shade800,
+                              Colors.teal.shade400,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            child: Text(
+                              'D',
+                              style: TextStyle(
+                                color: Colors.teal.shade800,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          title: const Text(
+                            'Dahlia Apriliyana',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          subtitle: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'NIM: 124230169',
+                                style: TextStyle(color: Colors.white70),
+                              ),
+                            ],
+                          ),
+                          isThreeLine: true,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
