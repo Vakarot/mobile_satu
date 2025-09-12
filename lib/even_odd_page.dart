@@ -81,6 +81,7 @@ class _EvenOddPageState extends State<EvenOddPage> {
                   filled: true,
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
+                    borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
